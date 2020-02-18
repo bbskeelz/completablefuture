@@ -3,7 +3,6 @@ package net.sc.future.front;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 import net.sc.future.endpoint.MathEngine;
 import net.sc.future.entity.Request;
@@ -11,7 +10,7 @@ import net.sc.future.entity.Request;
 public class App {
 
 	MathEngine engine = new MathEngine();
-	public void printOutput(Request[] in){
+	public static void printOutput(Request[] in){
 		for (Request request : in){
 			Arrays.stream(request.getResponse().getData()).forEach(System.out::print);
 			System.out.println();
@@ -27,14 +26,14 @@ public class App {
 	public void callEndpoint(Request[] in){
 		List<CompletableFuture<Void>> tasks = null;
 		tasks = submitBatch(in);
-		for (CompletableFuture<Void> task : tasks){
-			try {
-				task.get();
-				printOutput(in);
-			} catch (InterruptedException | ExecutionException e) {
-				e.printStackTrace();
-			}
-		}
+//		for (CompletableFuture<Void> task : tasks){
+//			try {
+//				task.get();
+//				printOutput(in);
+//			} catch (InterruptedException | ExecutionException e) {
+//				e.printStackTrace();
+//			}
+//		}
 	}
 
 	

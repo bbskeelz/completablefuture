@@ -6,6 +6,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 import net.sc.future.entity.Request;
+import net.sc.future.front.App;
 
 public class MathEngine {
 
@@ -37,7 +38,11 @@ public class MathEngine {
 					}
 					addByX(2, in[index]);
 				}, MathEngineTask.executor
-			));
+			).thenRun(() -> {
+				App.printOutput(in);
+				})
+					
+			);
 		}
 		return ret;
 	}
